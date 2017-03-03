@@ -3,6 +3,9 @@ package domain;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
+// simulating time, so all passengers dont arrive and board at the same time
+
 public class Clock implements Runnable {
   private final long sleepingTime = 10;
   private boolean running = true;

@@ -1,5 +1,7 @@
 package domain;
 
+// implements comparable, so we can compare the categories and boarding time
+
 public class Passenger implements Comparable<Passenger>{
   private final int id;
   private final Time arrivalTime;
