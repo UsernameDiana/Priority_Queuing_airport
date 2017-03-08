@@ -7,9 +7,8 @@ import domain.Passenger;
 
 public class PassengerHeap implements PriorityQueue<Passenger> {
 
-    private Passenger[] data;
-    public int size = 0;
-
+   private Passenger[] data;
+   public int size = 0;
      
    public PassengerHeap (int capacity) {
         data = new Passenger[capacity];
@@ -59,7 +58,7 @@ public class PassengerHeap implements PriorityQueue<Passenger> {
         Passenger result = data[1];
         swap(1, size--);
         
-        // This is borrowed from an integer dequeue!!! Might coste some problems
+        // This is borrowed from an integer dequeue!!! Might cost us some problems
          int n = 1;
          int c = 0;
          do{
