@@ -1,11 +1,19 @@
 package queues;
 
 // we fill out a tree from left to right
-public class PersonHeap implements PriorityQueue<Person> {
 
-    private Person[] data = new Person[capacity];
+import domain.Passenger;
+
+public class PersonHeap implements PriorityQueue<Passenger> {
+
+    private Passenger[] data;
     public int size = 0;
 
+     
+   public PersonHeap (int capacity) {
+        data = new Passenger[capacity];
+    }
+    
     // finding positions to left and right side
     private int leftOf(int p) {
         return 2 * p;
@@ -21,9 +29,9 @@ public class PersonHeap implements PriorityQueue<Person> {
     }
 
     // adding to queue
-    public void enqueue(Person person) {
+    public void enqueue(Passenger passenger) {
         int p = ++size;
-        data[p] = person;
+        data[p] = passenger;
         while (true) {
             int pp = parentOf(p);
             if (pp == 0 || data[p].compareTo(data[pp]) > 0) {
@@ -37,14 +45,22 @@ public class PersonHeap implements PriorityQueue<Person> {
     }
 
     // removing from queue, taking last element and removing
-    public Person dequeue() {
+    public Passenger dequeue() {
         if (size == 0) {
             // throw exception NO SUCH ELEMENT!
         }
-        Person result = data[1];
+        Passenger result = data[1];
+        return result;
     }
 
-    Person(int capacity) {
-        data = new Person[capacity];
+
+    @Override
+    public Passenger peek() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int size() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

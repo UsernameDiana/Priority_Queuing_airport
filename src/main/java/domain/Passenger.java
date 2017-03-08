@@ -15,7 +15,7 @@ public class Passenger implements Comparable<Passenger>{
     this.category = category;
     this.plane = plane;
     }
-  
+   
   public int getId() { return id; }
   
   public Time getArrivalTime() { return arrivalTime; }
