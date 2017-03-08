@@ -5,13 +5,13 @@ package queues;
 
 import domain.Passenger;
 
-public class Passenger_Heap implements PriorityQueue<Passenger> {
+public class PassengerHeap implements PriorityQueue<Passenger> {
 
     private Passenger[] data;
     public int size = 0;
 
      
-   public Passenger_Heap (int capacity) {
+   public PassengerHeap (int capacity) {
         data = new Passenger[capacity];
     }
     
