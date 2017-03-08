@@ -1,5 +1,6 @@
 package dk.cphbusiness.airport.template;
 
+import domain.Time;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
 import static org.junit.Assert.*;

@@ -3,6 +3,8 @@ package domain;
 import queues.PriorityQueue;
 import java.util.List;
 
+// removes customers from Prioraty Queue
+
 public class PassengerConsumer {
   private final List<Plane> planes;
   private final PriorityQueue<Passenger> queue;

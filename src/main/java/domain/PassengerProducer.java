@@ -4,6 +4,8 @@ import queues.PriorityQueue;
 import java.util.ArrayList;
 import java.util.List;
 
+// producing passengers arriving in airport, uses clock to produce intervals for arrivals
+
 public class PassengerProducer {
   private final List<Plane> planes;
   private final PriorityQueue<Passenger> queue;
