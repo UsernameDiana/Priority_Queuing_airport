@@ -1,16 +1,17 @@
 package queues;
 
 // we fill out a tree from left to right
+// A heap has big O(n log n)
 
 import domain.Passenger;
 
-public class PersonHeap implements PriorityQueue<Passenger> {
+public class Passenger_Heap implements PriorityQueue<Passenger> {
 
     private Passenger[] data;
     public int size = 0;
 
      
-   public PersonHeap (int capacity) {
+   public Passenger_Heap (int capacity) {
         data = new Passenger[capacity];
     }
     
@@ -53,10 +54,30 @@ public class PersonHeap implements PriorityQueue<Passenger> {
     // removing from queue, taking last element and removing
     public Passenger dequeue() {
         if (size == 0) {
-            // throw exception NO SUCH ELEMENT!
+            // throw exception NO SUCH ELEMENT Ex!
         }
         Passenger result = data[1];
-        return result;
+        swap(1, size--);
+        
+        // This is borrowed from an integer dequeue!!! Might coste some problems
+         int n = 1;
+         int c = 0;
+         do{
+            int l = leftOf(n);
+            int r = rightOf(n);
+
+            if (l > size) return result;
+            if (r > size) c =  l;
+            else if (data[l].compareTo(data[r]) < 0) c =  l;
+            else c = r;
+
+            if (data[n].compareTo(data[c]) > 0)
+            {
+               swap(n, c);
+               n = c;
+            }
+            else return result;
+         }while(true);
     }
 
 
@@ -66,7 +87,5 @@ public class PersonHeap implements PriorityQueue<Passenger> {
     }
 
     @Override
-    public int size() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public int size() { return size; }
 }
