@@ -13,6 +13,8 @@ public class Clock implements Runnable {
   private final PassengerConsumer consumer;
   private long millis;
   
+  // making a clock that knows about producer and consumer
+  
   public Clock(PassengerProducer producer, PassengerConsumer consumer, Time startTime) {
     this.producer = producer;
     this.consumer = consumer;
@@ -32,7 +34,7 @@ public class Clock implements Runnable {
     try {
       while (running) {
         Thread.sleep(sleepingTime);
-        producer.tick(this);
+        producer.tick(this); // sends tick to producer nd consumer
         consumer.tick(this);
         millis += 1000;
         }

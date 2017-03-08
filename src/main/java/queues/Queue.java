@@ -1,10 +1,6 @@
 package queues;
 
-/**
- * Contract for a Queue abstract data structure.
- * @param <T> the type of the queues items.
- * @author Marjahan Begum
- */
+
 public interface Queue<T> {
 
     /**
