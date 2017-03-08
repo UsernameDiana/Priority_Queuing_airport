@@ -37,13 +37,19 @@ public class PersonHeap implements PriorityQueue<Passenger> {
             if (pp == 0 || data[p].compareTo(data[pp]) > 0) {
                 return;
             }
-            data[0] = data[pp];
-            data[pp] = data[p];
-            data[p] = data[0];
+            swap(p, pp);
             p = pp;
         }
     }
 
+    // a swap method, to swap the position of n and m
+    public void swap(int n, int m)
+    {
+        data[0] = data[m];
+        data[m] = data[n];
+        data[n] = data[0];
+    }
+    
     // removing from queue, taking last element and removing
     public Passenger dequeue() {
         if (size == 0) {
