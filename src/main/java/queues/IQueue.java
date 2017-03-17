@@ -1,7 +1,7 @@
 package queues;
 
 
-public interface Queue<T> {
+public interface IQueue<T> {
 
     /**
      * Enqueue an item.
