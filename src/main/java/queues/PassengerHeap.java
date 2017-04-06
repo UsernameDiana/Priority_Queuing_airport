@@ -14,7 +14,7 @@ public class PassengerHeap implements PriorityQueue<Passenger> {
     public int size = 0;
 
     public static void main(String[] args) {
-        PassengerHeap ph = new PassengerHeap(100);
+        PassengerHeap ph = new PassengerHeap(100); // creating passengers
         for (int i = 0; i < 10; i++) {
             ph.enqueue(new Passenger(i, new Time(new Date().getTime()), ph.random(), new Plane(new Time(new Date().getTime()))));
         }
@@ -26,7 +26,7 @@ public class PassengerHeap implements PriorityQueue<Passenger> {
     }
 
     public PassengerHeap(int capacity) {
-        data = new Passenger[capacity];
+        data = new Passenger[capacity + 1];
     }
 
     // finding positions to left and right side
@@ -101,7 +101,7 @@ public class PassengerHeap implements PriorityQueue<Passenger> {
 
     @Override
     public Passenger peek() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return data[0];
     }
 
     @Override
@@ -110,7 +110,7 @@ public class PassengerHeap implements PriorityQueue<Passenger> {
     }
 
     private Category random() {
-    int rand = (int) (Math.random() * 5);
+        int rand = (int) (Math.random() * 5);
         if (rand == 0) {
             return Category.Monkey;
         }
@@ -123,10 +123,28 @@ public class PassengerHeap implements PriorityQueue<Passenger> {
         if (rand == 3) {
             return Category.BusinessClass;
         }
-        return Category.LateToFlight;    
+        return Category.LateToFlight;
     }
 
     private void printQueue() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (true) {
+            return;
+        }
+        String line = "";
+        int waitingInLine = 1;
+        for (int i = 1; i < size; i++) {
+            if (i == waitingInLine) {
+                line += System.lineSeparator();
+                waitingInLine *= 2;
+            }
+            for (int j = 0; j < size / (waitingInLine); j++) {
+                line += "  ";
+            }
+            line += data[i].getCategory();
+            for (int j = 0; j < size / (waitingInLine); j++) {
+                line += "  ";
+            }
+        }
+        System.out.println(line);
     }
 }
