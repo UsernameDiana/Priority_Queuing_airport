@@ -2,18 +2,33 @@ package queues;
 
 // we fill out a tree from left to right
 // A heap has big O(n log n)
-
+import domain.Category;
 import domain.Passenger;
+import domain.Plane;
+import domain.Time;
+import java.util.Date;
 
 public class PassengerHeap implements PriorityQueue<Passenger> {
 
-   private Passenger[] data;
-   public int size = 0;
-     
-   public PassengerHeap (int capacity) {
+    private Passenger[] data;
+    public int size = 0;
+
+    public static void main(String[] args) {
+        PassengerHeap ph = new PassengerHeap(100);
+        for (int i = 0; i < 10; i++) {
+            ph.enqueue(new Passenger(i, new Time(new Date().getTime()), ph.random(), new Plane(new Time(new Date().getTime()))));
+        }
+        ph.printQueue();
+        for (int i = 0; i < 10; i++) {
+            System.out.println(ph.dequeue().getCategory());
+            System.out.println("");
+        }
+    }
+
+    public PassengerHeap(int capacity) {
         data = new Passenger[capacity];
     }
-    
+
     // finding positions to left and right side
     private int leftOf(int p) {
         return 2 * p;
@@ -43,13 +58,12 @@ public class PassengerHeap implements PriorityQueue<Passenger> {
     }
 
     // a swap method, to swap the position of n and m
-    public void swap(int n, int m)
-    {
+    public void swap(int n, int m) {
         data[0] = data[m];
         data[m] = data[n];
         data[n] = data[0];
     }
-    
+
     // removing from queue, taking last element and removing
     public Passenger dequeue() {
         if (size == 0) {
@@ -57,28 +71,33 @@ public class PassengerHeap implements PriorityQueue<Passenger> {
         }
         Passenger result = data[1];
         swap(1, size--);
-        
+
         // This is borrowed from an integer dequeue!!! Might cost us some problems
-         int n = 1;
-         int c = 0;
-         do{
+        int n = 1;
+        int c = 0;
+        do {
             int l = leftOf(n);
             int r = rightOf(n);
 
-            if (l > size) return result;
-            if (r > size) c =  l;
-            else if (data[l].compareTo(data[r]) < 0) c =  l;
-            else c = r;
-
-            if (data[n].compareTo(data[c]) > 0)
-            {
-               swap(n, c);
-               n = c;
+            if (l > size) {
+                return result;
             }
-            else return result;
-         }while(true);
-    }
+            if (r > size) {
+                c = l;
+            } else if (data[l].compareTo(data[r]) < 0) {
+                c = l;
+            } else {
+                c = r;
+            }
 
+            if (data[n].compareTo(data[c]) > 0) {
+                swap(n, c);
+                n = c;
+            } else {
+                return result;
+            }
+        } while (true);
+    }
 
     @Override
     public Passenger peek() {
@@ -86,5 +105,28 @@ public class PassengerHeap implements PriorityQueue<Passenger> {
     }
 
     @Override
-    public int size() { return size; }
+    public int size() {
+        return size;
+    }
+
+    private Category random() {
+    int rand = (int) (Math.random() * 5);
+        if (rand == 0) {
+            return Category.Monkey;
+        }
+        if (rand == 1) {
+            return Category.Disabled;
+        }
+        if (rand == 2) {
+            return Category.Family;
+        }
+        if (rand == 3) {
+            return Category.BusinessClass;
+        }
+        return Category.LateToFlight;    
+    }
+
+    private void printQueue() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
