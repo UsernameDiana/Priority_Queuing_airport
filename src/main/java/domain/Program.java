@@ -17,6 +17,7 @@ public class Program {
         for (int hour = 7; hour <= 22; hour++) {
             planes.add(new Plane(new Time(hour, 00, 00))); // creating planes per hour
         }
+
         queue = new NotPrioritisingPassengerArrayQueue(100); // CHANGE WITH OUR OWN QUEUE!!!!
         producer = new PassengerProducer(planes, queue); // creates new producer
         consumer = new PassengerConsumer(planes, queue);
