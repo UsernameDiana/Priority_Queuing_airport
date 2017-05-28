@@ -15,25 +15,29 @@ public class PassengerProducer {
     private Random randomizer = new Random();
     private Time lastDeartureTime;
 
+                                        // Is it in here I want the PassengerHEap
     public PassengerProducer(List<Plane> planes, PriorityQueue<Passenger> queue) {
         this.planes = planes;
         this.queue = queue;
         lastDeartureTime = planes.get(planes.size() - 1).getDepartureTime();
     }
 
-    public void tick(Clock clock) {
+    public void tick(Clock clock)
+    {
         if (processingTicksLeft > 0) {
             processingTicksLeft--;
             return;
         }
         Time now = clock.getTime();
-        if (now.compareTo(lastDeartureTime) >= 0) {
+        if (now.compareTo(lastDeartureTime) >= 0)
+        {
             clock.stop();
             return;
         }
         Plane plane = null;
         while (plane == null) {
-            for (Plane p : planes) {
+            for (Plane p : planes)
+            {
                 if (p.getDepartureTime().compareTo(now) < 0) {
                     continue;
                 }
@@ -46,7 +50,8 @@ public class PassengerProducer {
 
         int c = randomizer.nextInt(100);
         Category category;
-        if (plane.getDepartureTime().getMillis() - now.getMillis() < 15 * 60 * 1000) {
+        if (plane.getDepartureTime().getMillis() - now.getMillis() < 15 * 60 * 1000)
+        {
             category = Category.LateToFlight;
         } else if (c < 10) {
             category = Category.BusinessClass;
@@ -59,7 +64,7 @@ public class PassengerProducer {
         }
 
         Passenger passenger = new Passenger(nextPassengerId++, now, category, plane);
-        System.out.println("Passenger " + passenger + " added to queue");
+        System.out.println("Passenger " + passenger.getCategory() + " added to queue");
         queue.enqueue(passenger);
 
         processingTicksLeft = randomizer.nextInt(120);

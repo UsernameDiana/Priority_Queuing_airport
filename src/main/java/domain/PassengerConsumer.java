@@ -11,7 +11,8 @@ public class PassengerConsumer {
   // Passenger being processed
   private Passenger passenger;
 
-  public PassengerConsumer(List<Plane> planes, PriorityQueue<Passenger> queue) {
+  public PassengerConsumer(List<Plane> planes, PriorityQueue<Passenger> queue)
+  {
     this.planes = planes;
     this.queue = queue;
     //passenger= queue.dequeue();
@@ -34,11 +35,11 @@ public class PassengerConsumer {
       Time now = clock.getTime();
       if (passenger.getPlane().getDepartureTime().compareTo(now) < 0) {
         passenger.setStatus(Status.MissedPlane);
-        System.out.println("Passenger "+passenger+" missed the plane");
+        System.out.println("Passenger "+passenger.toString()+" missed the plane");
         }
       else {
         passenger.setStatus(Status.Boarded);
-        System.out.println("Passenger "+passenger+" has boarded");
+        System.out.println("Passenger "+passenger.getCategory()+" has boarded");
         }
       }
     

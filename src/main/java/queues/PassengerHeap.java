@@ -7,21 +7,25 @@ import domain.Passenger;
 import domain.Plane;
 import domain.Time;
 import java.util.Date;
+import java.util.NoSuchElementException;
 
-public class PassengerHeap implements PriorityQueue<Passenger> {
-
+public class PassengerHeap implements PriorityQueue<Passenger>
+{
     private Passenger[] data;
     public int size = 0;
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         PassengerHeap ph = new PassengerHeap(100); // creating passengers
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++)
+        {
             ph.enqueue(new Passenger(i, new Time(new Date().getTime()), ph.random(), new Plane(new Time(new Date().getTime()))));
         }
         ph.printQueue();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++)
+        {
             System.out.println(ph.dequeue().getCategory());
-            System.out.println("");
+            System.out.println("Got the Dequeued's Category ");
         }
     }
 
@@ -44,7 +48,8 @@ public class PassengerHeap implements PriorityQueue<Passenger> {
     }
 
     // adding to queue
-    public void enqueue(Passenger passenger) {
+    public void enqueue(Passenger passenger)
+    {
         int p = ++size;
         data[p] = passenger;
         while (true) {
@@ -65,14 +70,15 @@ public class PassengerHeap implements PriorityQueue<Passenger> {
     }
 
     // removing from queue, taking last element and removing
-    public Passenger dequeue() {
+    public Passenger dequeue()
+    {
         if (size == 0) {
-            // throw exception NO SUCH ELEMENT Ex!
+            throw new NoSuchElementException("No such element !!!");
         }
         Passenger result = data[1];
         swap(1, size--);
 
-        // This is borrowed from an integer dequeue!!! Might cost us some problems
+                // This is borrowed from an integer dequeue!!! Might cost us some problems
         int n = 1;
         int c = 0;
         do {
@@ -109,7 +115,8 @@ public class PassengerHeap implements PriorityQueue<Passenger> {
         return size;
     }
 
-    private Category random() {
+    private Category random()
+    {
         int rand = (int) (Math.random() * 5);
         if (rand == 0) {
             return Category.Monkey;
@@ -126,22 +133,26 @@ public class PassengerHeap implements PriorityQueue<Passenger> {
         return Category.LateToFlight;
     }
 
-    private void printQueue() {
+    private void printQueue()
+    {
         if (true) {
             return;
         }
         String line = "";
         int waitingInLine = 1;
-        for (int i = 1; i < size; i++) {
+        for (int i = 1; i < size; i++)
+        {
             if (i == waitingInLine) {
                 line += System.lineSeparator();
                 waitingInLine *= 2;
             }
-            for (int j = 0; j < size / (waitingInLine); j++) {
+            for (int j = 0; j < size / (waitingInLine); j++)
+            {
                 line += "  ";
             }
             line += data[i].getCategory();
-            for (int j = 0; j < size / (waitingInLine); j++) {
+            for (int j = 0; j < size / (waitingInLine); j++)
+            {
                 line += "  ";
             }
         }
